@@ -19,6 +19,8 @@ import FormRegister  from "../views/FormRegister.vue";
 import FormInputPerusahaan from '../views/FormInputPerusahaan.vue'
 import FormUploadFileTambahan from '../views/FormUpoadFileTambahan.vue'
 import FormInputLogin from "../views/FormInputLogin.vue";
+import FormGabung from "../views/FormGabung.vue";
+import FormLoginDpc from '../views/FormLoginDpc.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -116,6 +118,14 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: FormInputLogin,
+    },{
+      path: '/testform',
+      name: 'testform',
+      component: FormGabung,
+    },{
+      path: '/logindpc',
+      name:'logindpc',
+      component: FormLoginDpc,
     }
   
   ]

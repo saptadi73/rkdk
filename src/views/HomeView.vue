@@ -1,5 +1,5 @@
 <script setup>
-import SideBar from "../components/SideBar.vue";
+import SideBarku from "../components/SideBarku.vue";
 import TopkuBar from "../components/TopkuBar.vue";
 
 </script>
@@ -7,7 +7,7 @@ import TopkuBar from "../components/TopkuBar.vue";
 <template>
   <main>
     <TopkuBar />
-    <SideBar/>
+    <SideBarku/>
     
   </main>
 </template>
