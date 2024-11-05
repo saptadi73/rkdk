@@ -129,7 +129,7 @@
   </section>
 </template>
 
-<script setup>
+<script>
 import axios from "axios";
 import router from "../router";
 import { ref } from "vue";
@@ -194,7 +194,7 @@ const isiInputKota = (searchQuery, searchID) => {
 
 const submitForm=(event)=>{
     event.preventDefault();
-    this.$router.push("inputpartaikota");
+    router.push("/inputpartaikota");
 }
 
 </script>

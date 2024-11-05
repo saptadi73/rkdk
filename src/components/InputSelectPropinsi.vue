@@ -25,6 +25,7 @@
           />
         </svg>
       </div>
+      <input type="hidden"  id="kode_propinsi" name="kode_propinsi">
       <div
         id="listPropinsi"
         name="listPropinsi"
@@ -32,12 +33,12 @@
         class="w-[300px] h-[200px] overflow-scroll"
       >
         <p
-          @click="IsiInput(resultKu.name, resultKu.id)"
+          @click="IsiInput(resultKu.nama, resultKu.kode)"
           v-for="resultKu in mapBoxSearchResult.data"
           :key="resultKu.id"
           class="p-2 text-black font-semibold cursor-pointer hover:text-slate-500 bg-gradient-to-r from-yellow-200 to-white"
         >
-          {{ resultKu.name }}
+          {{ resultKu.nama }}
         </p>
       </div>
     </div>
@@ -65,7 +66,7 @@
     queryTimeOut.value = setTimeout(async () => {
       try {
         const ResultPropinsi = await axios.get(
-          `https://api.goapi.io/regional/provinsi?api_key=${mapBoxAPIkey}`
+          `https://wilayah.rimang.id/propinsi`
         );
         mapBoxSearchResult.value = ResultPropinsi.data;
   
@@ -81,6 +82,7 @@
   
   const IsiInput = (searchQuery, searchID) => {
     document.getElementById("propinsi").value = searchQuery;
+    document.getElementById("kode_propinsi").value=searchID;
     document.getElementById("listPropinsi").classList.add("hidden");
    
   };

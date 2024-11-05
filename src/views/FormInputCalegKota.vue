@@ -1,6 +1,6 @@
 <template>
     <main>
-      <TopBarVue />
+      <TopkuBarVue />
       <SideBarVue />
       <DataCalegDprd2></DataCalegDprd2>
     </main>
@@ -9,7 +9,7 @@
   <script setup>
   
   import SideBarVue from "../components/SideBar.vue";
-  import TopBarVue from "../components/TopBar.vue"; 
+  import TopkuBarVue from "../components/TopkuBar.vue"; 
   import DataCalegDprd2 from '../components/DataCalegDprd2.vue'
   </script>
   

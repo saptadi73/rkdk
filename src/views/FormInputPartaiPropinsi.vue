@@ -1,6 +1,6 @@
 <template>
     <main>
-        <TopBar/>
+        <TopkuBar/>
         <SideBar/>
         <DataPartaiPropinsi/>
       </main>
@@ -10,7 +10,7 @@
 
 import DataPartaiPropinsi from '../components/DataPartaiPropinsi.vue';
 import SideBar from '../components/SideBar.vue';
-import TopBar from '../components/TopBar.vue';
+import TopkuBar from '../components/TopkuBar.vue';
 
 
 </script>

@@ -277,6 +277,7 @@
           </div>
           <div>
             <button
+            v-on:click="InputPerusahaan"
               class="font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 w-44 hover:bg-green-950 text-white p-2 border border-1 rounded-xl mt-10 border-slate-900"
             >
               Kirim Data
@@ -286,8 +287,111 @@
       </div>
     </div>
   </div>
+  <div id="modals" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+        <!-- Modal panel -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div class="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+                                    {{ Title }}
+                                </h3>
+                                <h4 class="text-sm font-semibold leading-6 text-gray-500">{{ subTitle }}</h4>
+                                <div class="mt-2">
+                                    <p class="text-sm text-black">
+                                        {{Description}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <a href="/login"
+                            class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 sm:ml-3 sm:w-auto">
+                            login
+                        </a>
+
+                        <button id="tutupmodals" type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                            @click="TutupModals">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
-<script setup></script>
+
+<script>
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { useCookies } from "vue3-cookies";
+
+
+export default {
+    data() {
+        return {
+            formValues: '',
+            Title:'',
+            subTitle:'',
+            Description:'',
+        }
+    },
+    setup() {
+
+        const { cookies } = useCookies();
+        return {
+            cookies,
+
+        }
+    },
+    methods: {
+        async InputPerusahaan(){
+        
+
+        this.formValues={
+            'id_registrasi': this.cookies.get("id"),
+            'email': this.cookies.get("email"),
+            'nama': document.getElementById("nama").value,
+            'alamat': document.getElementById("alamat").value,
+            'akta': document.getElementById("akta").value,
+            'sk': document.getElementById("sk").value,
+            'notelp': document.getElementById("notelp").value,
+            'email': document.getElementById("email").value,
+            'sumber': document.getElementById("sumber").value,
+            'ketua': document.getElementById("ketua").value,
+            'nohpketua': document.getElementById("nohpketua").value,
+            'bendahara': document.getElementById("bendahara").value,
+            'nohpbendahara': document.getElementById("nohpbendahara").value,
+            'emailbendahara': document.getElementById("emailbendahara").value,
+            'situs': document.getElementById("situs").value,
+          };
+
+        console.log(this.formValues);
+         await axios
+        .post(`http://localhost:8080/inputperusahaan`, this.formValues)
+        .then((response) => {
+          console.log(response);
+        })
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped></style>

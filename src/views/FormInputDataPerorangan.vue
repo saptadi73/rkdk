@@ -1,6 +1,6 @@
 <template>
     <main>
-      <TopBarVue />
+      <TopkuBarVue />
       <SideBarVue />
       <DataPerorangan></DataPerorangan>
     </main>
@@ -9,7 +9,7 @@
   <script setup>
   
   import SideBarVue from "../components/SideBar.vue";
-  import TopBarVue from "../components/TopBar.vue"; 
+  import TopkuBarVue from "../components/TopkuBar.vue"; 
   import DataPerorangan from "../components/DataPerorangan.vue";
   
   </script>

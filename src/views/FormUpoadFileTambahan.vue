@@ -1,6 +1,6 @@
 <template>
   <div>
-  components: { SideBar },iv>
+  
   
     <TopBar></TopBar>
     <SideBar></SideBar>

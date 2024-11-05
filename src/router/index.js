@@ -21,13 +21,33 @@ import FormUploadFileTambahan from '../views/FormUpoadFileTambahan.vue'
 import FormInputLogin from "../views/FormInputLogin.vue";
 import FormGabung from "../views/FormGabung.vue";
 import FormLoginDpc from '../views/FormLoginDpc.vue';
+import FormLoginSaksi from '../views/FormLoginSaksi.vue';
+import TableDataCalegPusatView from '../views/TableDataCalegPusatView.vue';
+import TableCalegPropinsiView from '../views/TableCalegPropinsiView.vue';
+import TableCalegKotaView from '../views/TableCalegKotaView.vue';
+import TablePartaiPropinsiView from '../views/TablePartaiPropinsiView.vue'
+import TablePartaiKotaView from '../views/TablePartaiKotaView.vue'
+import ChartViewTest from '../views/ChartViewTest.vue'
+import UpdateCalegPusatView from '../views/UpdateCalegPusatView.vue'
+import UpdateCalegKotaView from '../views/UpdateCalegKotaView.vue'
+import UpdateCalegPropinsiView from '../views/UpdateCalegPropinsiView.vue'
+import UpdatePartaiPropinsiView from '../views/UpdatePartaiPropinsiView.vue'
+import UpdatePartaiKotaView from '../views/UpdatePartaiKotaView.vue'
+import ViewPartai from '../views/ViewPartai.vue'
+import ViewPengeluaran from '../views/ViewPengeluaran.vue'
+import ViewUpdatePengeluaran from '../views/ViewUpdatePengeluaran.vue'
+import ViewInputBarang from '../views/ViewInputBarang.vue'
+import ViewUpdateDataBarang from '../views/ViewUpdateDataBarang.vue'
+import InputBarangVue from '../components/InputBarang.vue'
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'homeku',
       component: HomeView
     },
     {
@@ -126,7 +146,96 @@ const router = createRouter({
       path: '/logindpc',
       name:'logindpc',
       component: FormLoginDpc,
-    }
+    },
+    {
+      path: '/loginsaksi',
+      name: 'loginsaksi',
+      component: FormLoginSaksi,
+    },{
+      path: '/tablecalegpusat',
+      name: 'tablecalegpusat',
+      component: TableDataCalegPusatView,
+    },{
+      path: '/tablecalegpropinsi',
+      name: 'tablecalegpropinsi',
+      component: TableCalegPropinsiView,
+    },{
+      path: '/tablecalegkota',
+      name:'tablecalegkota',
+      component: TableCalegKotaView,
+    },
+    {
+      path: '/tablepartaipropinsi',
+      name:'tablepartaipropinsi',
+      component: TablePartaiPropinsiView,
+    },
+    {
+      path: '/tablepartaikota',
+      name:'tablepartaikota',
+      component: TablePartaiKotaView,
+    },{
+      path: '/home',
+      name:'home',
+      component: ChartViewTest,
+    },{
+      path: '/viewcalegpusat/:id',
+      name: 'viewcalegpusat',
+      component: UpdateCalegPusatView,
+    },
+    {
+      path: '/viewcalegkota/:id',
+      name: 'viewcalegkota',
+      component: UpdateCalegKotaView,
+    },
+    {
+      path: '/viewcalegpropinsi/:id',
+      name: 'viewcalegpropinsi',
+      component: UpdateCalegPropinsiView,
+    },
+  {
+    path: '/viewpartaipropinsi/:id',
+    name: 'viewpartaipropinsi',
+    component: UpdatePartaiPropinsiView,
+  },
+  {
+    path: '/viewpartaikota/:id',
+    name: 'viepartaikota',
+    component: UpdatePartaiKotaView,
+  },
+  {
+    path: '/viewpartai',
+    name: 'viewpartai',
+    component: ViewPartai,
+  },{
+    path: '/viewpengeluaran',
+    name: 'viewpengeluaran',
+    component: ViewPengeluaran,
+  },{
+    path: '/viewupdatepengeluaran/:id',
+    name: 'viewupdatepengeluaran',
+    component: ViewUpdatePengeluaran,
+  },
+  {
+    path: '/inputperusahaan',
+    name: 'inputperusahaan',
+    component: PerusahaanView,
+  },
+
+  {
+    path: '/viewperusahaan',
+    name: 'viewperusahaan',
+    component: UpdatePerusahaan,
+  },
+  {
+    path: '/inputbarang',
+    name: 'barang',
+    component: ViewInputBarang,
+  },
+  {
+    path: '/viewupdatebarang',
+    name: 'viewupdatebarang',
+    component: ViewUpdateDataBarang,
+  },
   
   ]
 })

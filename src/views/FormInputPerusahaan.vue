@@ -1,6 +1,6 @@
 <script setup>
 import SideBar from "../components/SideBar.vue";
-import TopBar from "../components/TopBar.vue";
+import TopkuBar from "../components/TopkuBar.vue";
 import DataPerusahaan from "../components/DataPerusahaan.vue";
 
 
@@ -8,7 +8,7 @@ import DataPerusahaan from "../components/DataPerusahaan.vue";
 
 <template>
   <main>
-    <TopBar/>
+    <TopkuBar/>
     <SideBar/>
     <DataPerusahaan/>
   </main>

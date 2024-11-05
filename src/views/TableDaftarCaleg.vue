@@ -1,6 +1,6 @@
 <template>
   <main>
-    <TopBar />
+    <TopkuBar />
     <SideBar />
     <TableCaleg/>
   </main>
@@ -8,6 +8,6 @@
 
 <script setup>
 import SideBar from "../components/SideBar.vue";
-import TopBar from "../components/TopBar.vue";
+import TopkuBar from "../components/TopkuBar.vue";
 import TableCaleg from "../components/TableCaleg.vue";
 </script>

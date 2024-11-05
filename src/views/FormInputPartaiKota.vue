@@ -1,6 +1,6 @@
 <template>
     <main>
-        <TopBar/>
+        <TopkuBar/>
         <SideBar/>
         <DataPartaiKota/>
       </main>
@@ -9,7 +9,7 @@
 <script setup>
 import DataPartaiKota from '../components/DataPartaiKota.vue';
 import SideBar from '../components/SideBar.vue';
-import TopBar from '../components/TopBar.vue';
+import TopkuBar from '../components/TopkuBar.vue';
 
 
 </script>

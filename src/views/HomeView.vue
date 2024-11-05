@@ -1,13 +1,14 @@
 <script setup>
-import SideBarku from "../components/SideBarku.vue";
-import TopkuBar from "../components/TopkuBar.vue";
+
+import LoginUser from "../components/LoginUser.vue";
+
 
 </script>
 
 <template>
   <main>
-    <TopkuBar />
-    <SideBarku/>
     
+    <LoginUser/>
+   
   </main>
 </template>

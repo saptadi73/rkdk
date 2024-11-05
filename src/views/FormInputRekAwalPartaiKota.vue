@@ -1,6 +1,6 @@
 <template>
     <main>
-      <TopBarVue />
+      <TopkuBarVue />
       <SideBarVue />
       <IsiRekAwalPartaiKota/>
     </main>
@@ -9,6 +9,6 @@
   <script setup>
   
   import SideBarVue from "../components/SideBar.vue";
-  import TopBarVue from "../components/TopBar.vue"; 
+  import TopkuBarVue from "../components/TopkuBar.vue"; 
   import IsiRekAwalPartaiKota from "../components/IsiRekAwalPartaiKota.vue";
   </script>

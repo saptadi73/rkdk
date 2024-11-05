@@ -1,0 +1,343 @@
+<template>
+    <div class="px-5 flex mt-16 mx-auto">
+        <div
+            class="flex bg-gradient-to-r from-slate-300 to-slate-200 hover:bg-gray-200 rounded-lg transition p-1 dark:bg-gray-700 dark:hover:bg-gray-600">
+            <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
+                <button type="button"
+                    class="hs-tab-active:bg-white hs-tab-active:text-gray-700 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-4 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-white font-medium rounded-md hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
+                    id="segment-item-1" data-hs-tab="#segment-1" aria-controls="segment-1" role="tab">
+                    Pilihan Wilayah
+                </button>
+                <button type="button"
+                    class="hs-tab-active:bg-white hs-tab-active:text-gray-700 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-4 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-white font-medium rounded-md hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-gray-300"
+                    id="segment-item-2" data-hs-tab="#segment-2" aria-controls="segment-2" role="tab">
+                    Data Diri Caleg Provinsi
+                </button>
+
+            </nav>
+        </div>
+    </div>
+    <div class="px-5 mt-3 mx-auto text-sm sm:text-xs">
+        <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col bg-gradient-to-r from-slate-200 to-slate-100 border shadow-sm rounded-lg">
+                    <div class="p-4 md:p-5">
+                        <h3 class="text-lg font-bold text-black dark:text-white">
+                            Pengisian Daerah Pemilihan
+                        </h3>
+                        <div class="mt-10 grid lg:grid-cols-2 gap-6">
+                            <div>
+                                <label for="propinsi">Pilih Propinsi</label>
+                                <div class="flex">
+                                    <input @focus="PreviewPropinsi" @change="PreviewPropinsi" id="propinsi" name="propinsi"
+                                        class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500" />
+                                    <svg @click="UlangListPropinsi" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                    </svg>
+                                </div>
+                                <div id="listPropinsi" name="listPropinsi" v-if="mapBoxSearchResult"
+                                    class="w-[300px] h-[200px] overflow-scroll">
+                                    <p @click="IsiInput(resultKu.nama, resultKu.kode)"
+                                        v-for="resultKu in mapBoxSearchResult.data" :key="resultKu.id"
+                                        class="p-2 text-black font-semibold cursor-pointer hover:text-slate-500 bg-gradient-to-r from-yellow-200 to-white">
+                                        {{ resultKu.nama }}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <input type="hidden" id="kode_propinsi" name="kode_propinsi" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="dapil" class="text-gray-800 text-sm font-medium block mb-2">Nomor Dapil</label>
+                                <input type="number" id="dapil"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <label for="urut" class="text-gray-800 text-sm font-medium block mb-2">Nomor Urut</label>
+                                <input type="number" id="urut" name="urut"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col bg-gradient-to-r from-slate-200 to-slate-100 border shadow-sm rounded-lg">
+                    <div class="p-4 md:p-5">
+                        <h3 class="text-lg font-bold text-black dark:text-white">
+                            Pengisian Data Diri Caleg Provinsi
+                        </h3>
+                        <div class="mt-10 grid lg:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nama" class="text-gray-800 text-sm font-medium block mb-2">Nama Lengkap</label>
+                                <input type="text" id="nama" name="nama"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+                            <div>
+                                <label for="nohp" class="text-gray-800 text-sm font-medium block mb-2">Kontak HP/WA
+                                    Caleg</label>
+                                <input type="number" id="nohp" name="nohp"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+                            <div>
+                                <label for="alamat" class="text-gray-800 text-sm font-medium block mb-2">Alamat
+                                    Caleg</label>
+                                <input type="text" id="alamat" name="alamat"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+                            <div>
+                                <label for="nik" class="text-gray-800 text-sm font-medium block mb-2">NIK</label>
+                                <input type="number" id="nik" name="nik"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+                            <div>
+                                <label for="pendidikan"
+                                    class="text-gray-800 text-sm font-medium block mb-2">Pendidikan</label>
+                                <select id="pendidikan"
+                                    class="form-select py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <option value="S3">S3</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S1">S1</option>
+                                    <option value="D3">D3</option>
+                                    <option value="SLTA">SLTA</option>
+                                    <option value="SLTP">SLTP</option>
+                                </select>
+                            </div>
+                            <input type="hidden" id="id_dprd2" name="id_dprd2">+
+                            <div>
+                                <label for="jeniskelamin" class="text-gray-800 text-sm font-medium block mb-2">Jenis
+                                    Kelamin</label>
+                                <select id="jeniskelamin"
+                                    class="form-select py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+
+                                </select>
+                            </div>
+                            <div>
+                                <label for="tempat_lahir" class="text-gray-800 text-sm font-medium block mb-2">Tempat
+                                    Lahir</label>
+                                <input type="text" id="tempat_lahir"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+
+                            <div>
+                                <label for="tanggal_lahir" class="text-gray-800 text-sm font-medium block mb-2">Tanggal
+                                    Lahir</label>
+                                <input type="date" id="tanggal_lahir"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+
+                            <div>
+                                <label for="npwp" class="text-gray-800 text-sm font-medium block mb-2">NPWP</label>
+                                <input type="text" id="npwp"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500" />
+                            </div>
+                            <div>
+                                <label for="pekerjaan"
+                                    class="text-gray-800 text-sm font-medium block mb-2">Pekerjaan</label>
+                                <input type="text" id="pekerjaan" name="pekerjaan"
+                                    class="form-input py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                                    required />
+                            </div>
+                            <div>
+                                <button id="submitData" name="submitData" v-on:click="SubmitDataCalegDprd1"
+                                    class="font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 w-44 hover:bg-green-950 text-white p-2 border border-1 rounded-xl mt-10 border-slate-900">Kirim
+                                    Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+  
+<script setup>
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { useCookies } from "vue3-cookies";
+
+
+
+const { cookies } = useCookies();
+
+
+const searchQuery = ref("");
+const queryTimeOut = ref(null);
+
+const mapBoxSearchResult = ref(null);
+var searchError = false;
+const mapBoxSearchResultKota = ref(null);
+const mapBoxSearchResultUpdateKota = ref(null);
+
+const router = useRouter();
+
+
+
+const PreviewPropinsi = () => {
+    clearTimeout(queryTimeOut.value);
+
+
+    queryTimeOut.value = setTimeout(async () => {
+        try {
+            const ResultPropinsi = await axios.get(`https://wilayah.rimang.id/propinsi`);
+            mapBoxSearchResult.value = ResultPropinsi.data;
+
+            console.log(mapBoxSearchResult.value);
+        } catch (error) {
+            console.log(error);
+            searchError = true;
+        }
+
+        return;
+    }, 300);
+};
+
+const IsiInput = (searchQuery, searchID) => {
+    document.getElementById("propinsi").value = searchQuery;
+    document.getElementById("kode_propinsi").value = searchID;
+    document.getElementById("listPropinsi").classList.add("hidden");
+
+};
+
+const UlangListPropinsi = () => {
+    let listPropinsi = document.getElementById("listPropinsi");
+    let listKota = document.getElementById("listKota");
+    let Kota = document.getElementById("kota");
+    let Propinsi = document.getElementById("propinsi");
+    Propinsi.value = "Ulangi Pilih Propinsi";
+
+    if (listPropinsi.classList.contains("hidden")) {
+        listPropinsi.classList.remove("hidden");
+        listKota.classList.remove("hidden");
+    } else {
+        listPropinsi.classList.add("hidden");
+        listKota.classList.add("hidden");
+    }
+
+    Kota.value = "Ulangi pilih kota/kab";
+};
+const SubmitDataCalegDprd1 = () => {
+    const m_propinsi = document.getElementById("propinsi").value;
+    const m_kode_propinsi = document.getElementById("kode_propinsi").value;
+    const m_id_dprd2 = document.getElementById("id_dprd2").value;
+    const m_tanggal_lahir = document.getElementById("tanggal_lahir").value;
+    const m_dapil = document.getElementById("dapil").value;
+    const m_urut = document.getElementById("urut").value;
+    const m_nama = document.getElementById("nama").value;
+    const m_nik = document.getElementById("nik").value;
+    const m_pendidikan = document.getElementById("pendidikan").value;
+    const m_jeniskelamin = document.getElementById("jeniskelamin").value;
+    const m_alamat = document.getElementById("alamat").value;
+    const m_tempat_lahir = document.getElementById("tempat_lahir").value;
+    const m_nohp = document.getElementById("nohp").value;
+    const m_npwp = document.getElementById("npwp").value;
+    const m_pekerjaan = document.getElementById("pekerjaan").value;
+
+    const formValues = {
+        'propinsi': m_propinsi,
+        'kode_propinsi': m_kode_propinsi,
+        'id_registrasi': cookies.get('id'),
+        'id_dprd2': m_id_dprd2,
+        'email': cookies.get('email'),
+        'tanggal_lahir': m_tanggal_lahir,
+        'tempat_lahir': m_tempat_lahir,
+        'dapil': m_dapil,
+        'urut': m_urut,
+        'nama': m_nama,
+        'nik': m_nik,
+        'alamat': m_alamat,
+        'pendidikan': m_pendidikan,
+        'jeniskelamin': m_jeniskelamin,
+        'nohp': m_nohp,
+        'npwp': m_npwp,
+        'pekerjaan': m_pekerjaan,
+    }
+
+    clearTimeout(queryTimeOut.value);
+    queryTimeOut.value = setTimeout(async () => {
+        try {
+            const ResultKota = await axios.post(
+                `http://localhost:8080/updatecalegdprd1`,
+                formValues,
+                {
+                    Headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                }
+            );
+            mapBoxSearchResultKota.value = ResultKota.data;
+            console.log(mapBoxSearchResultKota.value);
+        } catch (error) {
+            console.log(error);
+            searchError = true;
+        }
+
+        return;
+    }, 300);
+
+    router.push('/uploadfile');
+};
+
+const UpdateViewCalegDprd2 = () => {
+    
+    clearTimeout(queryTimeOut.value);
+    queryTimeOut.value = setTimeout(async () => {
+        try {
+            const ResultUpdateKota = await axios.get(
+                `http://localhost:8080/findcalegdprd1/${id_dprd2}`,
+                formValues,
+                {
+                    Headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                }
+            );
+            mapBoxSearchResultKota.value = ResultUpdateKota.data;
+            console.log(mapBoxSearchUpdateResultKota.value);
+            document.getElementById("propinsi").value=mapBoxSearchResultUpdateKota.value.data.propinsi;
+            document.getElementById("kode_propinsi").value=mapBoxSearchResultUpdateKota.value.data.kode_propinsi;
+            document.getElementById("id_dprd2").value=mapBoxSearchResultUpdateKota.value.data.id_dprd2;
+            document.getElementById("tanggal_lahir").value=mapBoxSearchResultUpdateKota.value.data.propinsi.tanggal_lahir;
+            document.getElementById("dapil").value=mapBoxSearchResultUpdateKota.value.data.dapil;
+            document.getElementById("urut").value=mapBoxSearchResultUpdateKota.value.data.urut;
+            document.getElementById("nama").value=mapBoxSearchResultUpdateKota.value.data.nama;
+            document.getElementById("nik").value=mapBoxSearchResultUpdateKota.value.data.nik;
+            document.getElementById("pendidikan").value=mapBoxSearchResultUpdateKota.value.data.pendidikan;
+            document.getElementById("jeniskelamin").value=mapBoxSearchResultUpdateKota.value.data.jeniskelamin;
+            document.getElementById("alamat").value=mapBoxSearchResultUpdateKota.value.data.alamat;
+            document.getElementById("tempat_lahir").value=mapBoxSearchResultUpdateKota.value.data.tempat_lahir;
+            document.getElementById("nohp").value=mapBoxSearchResultUpdateKota.value.data.nohp;
+            document.getElementById("npwp").value=mapBoxSearchResultUpdateKota.value.data.npwp;
+            document.getElementById("pekerjaan").value=mapBoxSearchResultUpdateKota.value.data.pekerjaan;
+
+        } catch (error) {
+            console.log(error);
+            searchError = true;
+        }
+
+        return;
+    }, 300);
+}
+
+
+
+</script>
+  
+<style lang="scss" scoped></style>
+  
